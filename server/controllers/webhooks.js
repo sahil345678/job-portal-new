@@ -89,6 +89,11 @@ export const clerkWebhooks = async (req, res) => {
     const { data, type } = event;
     console.log("📩 Clerk webhook received:", type, data);
 
+    console.log("➡️  Raw payload:", req.body);
+    console.log("➡️  Headers:", req.headers);
+    console.log("✅ Is Buffer:", Buffer.isBuffer(req.body));
+
+
     switch (type) {
       case "user.created":
         await User.create({
