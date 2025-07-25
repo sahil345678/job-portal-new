@@ -22,7 +22,10 @@ export const AppContextProvider = (props) => {
 
   const [showRecuriterLogin, setShowRecuriterLogin] = useState(false);
 
-  const [companyToken, setCompanyToken] = useState(null);
+  // --- UPDATED LINE: initialize companyToken from localStorage or empty string ---
+  const [companyToken, setCompanyToken] = useState(
+    localStorage.getItem("companyToken") || ""
+  );
   const [companyData, setCompanyData] = useState(null);
 
   const [userData, setUserData] = useState(null);
@@ -99,14 +102,10 @@ export const AppContextProvider = (props) => {
       toast.error(error.message);
     }
   };
+
   useEffect(() => {
     fetchjobs();
-
-    const storedCompanyToken = localStorage.getItem("companyToken");
-
-    if (storedCompanyToken) {
-      setCompanyToken(storedCompanyToken);
-    }
+    // --- REMOVED redundant localStorage logic ---
   }, []);
 
   useEffect(() => {
